@@ -3,16 +3,21 @@ import time
 from utils.yamlwork import read_yaml
 from utils.commands import run_command
 
-if not os.path.exists('config.yaml'):
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+CONFIG_FILE = os.path.join(BASE_DIR, "config.yaml")
+
+if not os.path.exists(CONFIG_FILE):
     print('config.yaml not exist')
     sys.exit(128)
 
-config = read_yaml('config.yaml')
+config = read_yaml(CONFIG_FILE)
 
 def load_tasks():
-    if not config["tasks"]:
-        raise ValueError("No tasks defined in config.yaml")
-    for task in config["tasks"]:
+    taskList = config.get("tasks", None)
+    if not taskList:
+        print("No tasks defined in config.yaml. Scheduler is running idle.")
+        return
+    for task in taskList:
         name = task["name"]
         command = task["command"]
         schedule_config = task["schedule"]
@@ -42,6 +47,7 @@ def load_tasks():
             raise ValueError(f"Unknown schedule type: {schedule_type}")
 
 def main():
+    print("AXScheduler started.")
     load_tasks()
     while True:
         schedule.run_pending()
