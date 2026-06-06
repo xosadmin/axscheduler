@@ -28,3 +28,8 @@ Add or modify task entries in `config.yaml`. For examples, please refer to [exam
 ```bash
 systemctl restart axscheduler
 ```
+#### Reload on Windows
+```cmd
+schtasks /End /TN "AXScheduler"
+schtasks /Run /TN "AXScheduler"
+```
