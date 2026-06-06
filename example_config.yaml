@@ -1,0 +1,36 @@
+tasks:
+  - name: task_every_second
+    command: whoami
+    schedule:
+      type: interval
+      seconds: 1
+    # Run 'whoami' every second
+  - name: task_every_2_minutes
+    command: whoami
+    schedule:
+      type: interval
+      minutes: 2
+      at: ":00"
+    # Run 'whoami' every 2 minutes, e.g. 12:00:00, 12:02:00
+  - name: task_every_3_hours
+    command: whoami
+    schedule:
+      type: interval
+      hours: 3
+      at: ":10:10"
+    # Run 'whoami' every 3 hours at minute 10, e.g. 12:10:10, 15:10:10
+  - name: task_name_2
+    command: echo "Hello"
+    schedule:
+      type: every_n_days
+      days: 3
+      at: "02:00:00"
+    # echo 'hello' every 3 days at 02:00:00
+  - name: task_name_3
+    command: echo "Good Bye"
+    schedule:
+      type: every_n_days
+      days: 2
+      at: "00:00:01"
+    # echo 'goodbye' every 2 days at 00:00:01
+# PLEASE NOTE THAT ALL TASK EXECUTION TIME ARE BASED ON THE TIME THAT THIS DAEMON STARTS RUNNING

@@ -1,0 +1,15 @@
+[Unit]
+Description=Python YAML Task Scheduler
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=__CHANGEDIR__
+ExecStart=/usr/bin/python3 __CHANGEDIR__/main.py
+Restart=always
+RestartSec=5
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
